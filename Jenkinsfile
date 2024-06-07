@@ -16,11 +16,16 @@ pipeline {
                 checkout scm
             }
         }
-	stage('SonarQube Analysis') {
-   	 steps {
-     		 bat "mvn clean verify sonar:sonar -Dsonar.projectKey=testing -Dsonar.projectName='testing'"
-    	   }
- 	 }
+	stage('Sonarqube analysis') {
+         steps {
+          script {
+            scannerHome = tool 'SonarScanner';
+          }
+        withSonarQubeEnv('SonarQube') {
+            bat "${scannerHome}/bin/sonar-scanner.bat" 
+        }
+    }
+}
 
 		stage('Build'){
 			steps {

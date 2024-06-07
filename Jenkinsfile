@@ -6,7 +6,7 @@ pipeline {
 	}
 
 	stages {
-        stage('Clean Workspace') {
+                stage('Clean Workspace') {
             steps {
                 cleanWs()
             }
@@ -17,7 +17,7 @@ pipeline {
             }
         }
 	stage('SonarQube Analysis') {
-   	 withSonarQubeEnv() {
+   	 steps {
      		 bat "mvn clean verify sonar:sonar -Dsonar.projectKey=testing -Dsonar.projectName='testing'"
     	   }
  	 }

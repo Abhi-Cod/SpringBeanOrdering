@@ -19,13 +19,13 @@ pipeline {
 	stage('Sonarqube analysis') {
          steps {
           script {
-            scannerHome = tool 'SonarQubeScanner-6.0.0';
+            scannerHome = tool 'SonarScanner';
           }
-        withSonarQubeEnv('sonarqube-10.5.1.90531') {
-            bat "C:\ProgramData\Jenkins\.jenkins\tools\hudson.plugins.sonar.SonarRunnerInstallation\SonarQubeScanner-6.0.0\bin\sonar-scanner.bat" 
-         }
-       }
-     }
+            withSonarQubeEnv('sonarqube-10.5.1.90531') {
+             bat "${scannerHome}/bin/sonar-scanner.bat" 
+        }
+      }
+    }
 
 		stage('Build'){
 			steps {
